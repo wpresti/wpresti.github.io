@@ -12,6 +12,7 @@
   var data;
  
   function handleFileSelect(evt) {
+    console.log("a2")
     var file = evt.target.files[0];
  
     Papa.parse(file, {
@@ -24,6 +25,7 @@
   }
  
   $(document).ready(function(){
+    console.log("a1")
     $("#csv-file").change(handleFileSelect);
   });
 </script>
