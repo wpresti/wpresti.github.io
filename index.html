@@ -30,7 +30,7 @@
           if (data.hasOwnProperty(key)) {
             strBuilder.push("Key is " + key + ", value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
             str = JSON.stringify(data[key]["Present Students"])
-            splitArr = str.split(",")
+            var splitArr = str.split(",")
             //now do processing for dictionary
             for(var name in splitArr) {
               dict[name] = "hello world"
