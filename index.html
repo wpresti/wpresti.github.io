@@ -21,6 +21,7 @@
       complete: function(results) {
         data = results;
         console.log(data)
+        document.getElementById('target-id').innerHTML = data;
         window.alert(data[0])
       }
     });
@@ -32,3 +33,8 @@
   });
 </script>
 <input type="file" id="csv-file" name="files"/>
+
+
+<body>
+  <div id="target-id"></div>
+</body>
