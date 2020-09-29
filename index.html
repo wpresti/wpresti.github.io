@@ -21,7 +21,7 @@
       complete: function(results) {
         data = results;
         console.log(data)
-        document.getElementById('target-id').innerHTML = data.data[3];
+        document.getElementById('target-id').innerHTML = JSON.stringify(data.data[3]);
         //window.alert(data[0])
         data = data.data // new
         var strBuilder = [];
