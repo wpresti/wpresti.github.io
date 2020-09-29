@@ -32,9 +32,9 @@
             var str = "" + JSON.stringify(data[key]["Present Students"])
             var splitArr = str.split(",")
             //now do processing for dictionary
-            for(var name in splitArr) {
-              console.log(splitArr[name])
-              dict[name] = "hello world"
+            for(var i in splitArr) {
+              console.log(splitArr[i])
+              dict[i] = "hello world"
             }
           }
         }
