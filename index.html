@@ -21,7 +21,7 @@
       complete: function(results) {
         data = results;
         console.log(data)
-        document.getElementById('target-id').innerHTML = data;
+        document.getElementById('target-id').innerHTML = data.data;
         window.alert(data[0])
       }
     });
