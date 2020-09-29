@@ -2,12 +2,10 @@
 //global Varibales
 var dateFromPicker = null
 
-// function setDate() {
-//     console.log("button clicked")
-//     dateFromPicker = null
-
-    
-// }
+function clearFile() {
+    console.log("button clicked")
+    document.getElementById("csv-file").value = null
+}
 
 window.onload=function(){
     var dInput = document.getElementById("dateInput");
@@ -72,15 +70,29 @@ function handleFileSelect(evt) {
             }
             else{
               var dateObj = new Date(JSON.stringify(data[key]["Attendance Date"]));
-              dict[splitArr[i]] = dateObj
+              if (dateObj.getTime() < dateFromPicker.getTime()){
+                  dict[splitArr[i]] = dateObj
+              }
 
             }
           }
         }
       }
       console.log(dict)
+      var list = []
 
       alert(strBuilder.join(""));
+      for (var key in dict){
+          if (dict.hasOwnProperty(key)){
+              console.log("key:",key, " --- value: ", dict[key])
+              list.push(key)
+          }
+      }
+      var pplStr = list.join(", ")
+      console.log("ppl string :D", pplStr)
+      console.log(list.length)
+
+
     }
   });
 }
