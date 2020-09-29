@@ -1,55 +1,13 @@
 <script src="./papaparse.min.js"></script>
 <script src="./docs/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
 <form>
   <label for="Date">Enter Date:</label>
-  <input type="date" id="D" name="Date">
-  <input type="submit">
+  <input type="date" id="dateInput" name="Date">
+  <input type="button" id="B" name="Button" value="Click Me" onclick="setDate()">
 </form>
 
 
-
-<script>
-  var data;
- 
-  function handleFileSelect(evt) {
-    console.log("a2")
-    var file = evt.target.files[0];
- 
-    Papa.parse(file, {
-      header: true,
-      dynamicTyping: true,
-      complete: function(results) {
-        data = results;
-        console.log(data)
-        document.getElementById('target-id').innerHTML = JSON.stringify(data.data);
-        //window.alert(data[0])
-        data = data.data // new
-        var dict = {}
-        var strBuilder = [];
-        for(key in data) {
-          if (data.hasOwnProperty(key)) {
-            strBuilder.push("Key is " + key + ", value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
-            var str = "" + JSON.stringify(data[key]["Present Students"])
-            var splitArr = str.split(",")
-            //now do processing for dictionary
-            for(var i in splitArr) {
-              console.log(splitArr[i])
-              dict[splitArr[i]] = "hello world"
-            }
-          }
-        }
-        console.log(dict)
-
-        alert(strBuilder.join(""));
-      }
-    });
-  }
- 
-  $(document).ready(function(){
-    console.log("a1")
-    $("#csv-file").change(handleFileSelect);
-  });
-</script>
 <input type="file" id="csv-file" name="files"/>
 
 
