@@ -22,7 +22,15 @@
         data = results;
         console.log(data)
         document.getElementById('target-id').innerHTML = data.data;
-        window.alert(data[0])
+        //window.alert(data[0])
+        var strBuilder = [];
+        for(key in data) {
+          if (data.hasOwnProperty(key)) {
+            strBuilder.push("Key is " + key + ", value is " + data[key] + "\n");
+           }
+        }
+
+        alert(strBuilder.join(""));
       }
     });
   }
