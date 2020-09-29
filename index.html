@@ -27,7 +27,7 @@
         var strBuilder = [];
         for(key in data) {
           if (data.hasOwnProperty(key)) {
-            strBuilder.push("Key is " + key + ", value is " + data[key] + "\n");
+            strBuilder.push("Key is " + key + ", value is " + JSON.stringify(data[key]) + "\n");
            }
         }
 
