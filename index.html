@@ -23,6 +23,7 @@
         console.log(data)
         document.getElementById('target-id').innerHTML = data.data;
         //window.alert(data[0])
+        data = data.data // new
         var strBuilder = [];
         for(key in data) {
           if (data.hasOwnProperty(key)) {
