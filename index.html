@@ -29,7 +29,8 @@
         for(key in data) {
           if (data.hasOwnProperty(key)) {
             strBuilder.push("Key is " + key + ", value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
-            splitArr = JSON.stringify(data[key]["Present Students"]).split(",")
+            str = JSON.stringify(data[key]["Present Students"])
+            splitArr = str.split(",")
             //now do processing for dictionary
             for(var name in splitArr) {
               dict[name] = "hello world"
