@@ -24,12 +24,19 @@
         document.getElementById('target-id').innerHTML = JSON.stringify(data.data);
         //window.alert(data[0])
         data = data.data // new
+        var dict = {}
         var strBuilder = [];
         for(key in data) {
           if (data.hasOwnProperty(key)) {
             strBuilder.push("Key is " + key + ", value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
-           }
+            splitArr = JSON.stringify(data[key]["Present Students"]).split(",")
+            //now do processing for dictionary
+            for(var name in splitArr) {
+              dict[name] = "hello world"
+            }
+          }
         }
+        console.log(dict)
 
         alert(strBuilder.join(""));
       }
