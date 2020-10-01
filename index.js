@@ -1,3 +1,5 @@
+//DUPLICATES ARE HAPPENING BECAUSE OF " BEING INCLUDED IN NAME :(
+
 //var Papa = require('papaparse');
 //global Varibales
 var dateFromPicker = null
@@ -16,21 +18,12 @@ function handleDateChange() {
     var input = this.value;
     var dateEntered = new Date(input);
     console.log(input); //e.g. 2015-11-13
-    //console.log(dateEntered); //e.g. Fri Nov 13 2015 00:00:00 GMT+0000 (GMT Standard Time)
     dateFromPicker = dateEntered
     console.log("date changed to:", dateFromPicker)
     //date off by a day due to timezone not being set. -- TODO
     
 }
 
-// document.getElementById("dateInput").addEventListener("change", function() {
-//     var input = this.value;
-//     var dateEntered = new Date(input);
-//     console.log(input); //e.g. 2015-11-13
-//     console.log(dateEntered); //e.g. Fri Nov 13 2015 00:00:00 GMT+0000 (GMT Standard Time)
-//     dateFromPicker = dateEntered
-//     console.log("date changed to:", dateFromPicker)
-// });
 
 var data;
  
@@ -43,9 +36,9 @@ function handleFileSelect(evt) {
     dynamicTyping: true,
     complete: function(results) {
       data = results;
-      console.log(data)
-      document.getElementById('target-id').innerHTML = JSON.stringify(data.data);
-      //window.alert(data[0])
+      
+      //document.getElementById('target-id').innerHTML = JSON.stringify(data.data);
+     
       data = data.data // new
       var dict = {}
       var strBuilder = [];
@@ -53,44 +46,50 @@ function handleFileSelect(evt) {
         if (data.hasOwnProperty(key)) {
           strBuilder.push("Key is " + key + ", date is: " + JSON.stringify(data[key]["Attendance Date"]) + " value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
           var str = "" + JSON.stringify(data[key]["Present Students"])
+          str = str.slice(1,-1)
           var splitArr = str.split(",")//split present students into array
+          console.log("SPLIT ARRAY IS:", splitArr)
           //now do processing for dictionary
           for(var i in splitArr) {
-            console.log(splitArr[i])
+            //console.log(splitArr[i])
             if (splitArr[i] in dict){//compare
                 dicDate = dict[splitArr[i]]
                 var rowDate = new Date(JSON.stringify(data[key]["Attendance Date"]));
-                console.log("swag", dicDate.getTime())
+                //console.log("swag", dicDate.getTime())
                 //if (dateFromPicker.getTime() < dicDate.getTime() & True)
-                if (rowDate.getTime() > dicDate.getTime() && rowDate.getTime() < dateFromPicker.getTime()){
+                if (rowDate.getTime() > dicDate.getTime()){
                     //update dict[key] w date
                     dict[splitArr[i]] = rowDate
                 }
 
             }
             else{
-              var dateObj = new Date(JSON.stringify(data[key]["Attendance Date"]));
-              if (dateObj.getTime() < dateFromPicker.getTime()){
-                  dict[splitArr[i]] = dateObj
-              }
-
+                var rowDate = new Date(JSON.stringify(data[key]["Attendance Date"]));
+                dict[splitArr[i]] = rowDate
             }
           }
         }
       }
       console.log(dict)
       var list = []
-
+      //check 
+      //rowDate.getTime() < dateFromPicker.getTime()
       alert(strBuilder.join(""));
       for (var key in dict){
           if (dict.hasOwnProperty(key)){
               console.log("key:",key, " --- value: ", dict[key])
-              list.push(key)
+              if (dict[key].getTime() <= dateFromPicker.getTime()){
+                list.push(key)
+
+              }
           }
       }
       var pplStr = list.join(", ")
-      console.log("ppl string :D", pplStr)
+      //console.log("ppl string :D", pplStr)
       console.log(list.length)
+      console.log("plz work dude", dateFromPicker)
+      console.log(list)
+      document.getElementById('target-id').innerHTML = list
 
 
     }
