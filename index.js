@@ -16,7 +16,7 @@ window.onload=function(){
 
 function handleDateChange() {
     var input = this.value;
-    var dateEntered = new Date(input);
+    var dateEntered = new Date(input + " 00:00:00");
     console.log(input); //e.g. 2015-11-13
     dateFromPicker = dateEntered
     console.log("date changed to:", dateFromPicker)
@@ -41,22 +41,19 @@ function handleFileSelect(evt) {
      
       data = data.data // new
       var dict = {}
-      var strBuilder = [];
+      //var strBuilder = [];
       for(key in data) {
         if (data.hasOwnProperty(key)) {
-          strBuilder.push("Key is " + key + ", date is: " + JSON.stringify(data[key]["Attendance Date"]) + " value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
+          //strBuilder.push("Key is " + key + ", date is: " + JSON.stringify(data[key]["Attendance Date"]) + " value is " + JSON.stringify(data[key]["Present Students"]) + "\n");
           var str = "" + JSON.stringify(data[key]["Present Students"])
           str = str.slice(1,-1)
           var splitArr = str.split(",")//split present students into array
           console.log("SPLIT ARRAY IS:", splitArr)
           //now do processing for dictionary
           for(var i in splitArr) {
-            //console.log(splitArr[i])
             if (splitArr[i] in dict){//compare
                 dicDate = dict[splitArr[i]]
                 var rowDate = new Date(JSON.stringify(data[key]["Attendance Date"]));
-                //console.log("swag", dicDate.getTime())
-                //if (dateFromPicker.getTime() < dicDate.getTime() & True)
                 if (rowDate.getTime() > dicDate.getTime()){
                     //update dict[key] w date
                     dict[splitArr[i]] = rowDate
@@ -74,7 +71,7 @@ function handleFileSelect(evt) {
       var list = []
       //check 
       //rowDate.getTime() < dateFromPicker.getTime()
-      alert(strBuilder.join(""));
+      //alert(strBuilder.join(""));
       for (var key in dict){
           if (dict.hasOwnProperty(key)){
               console.log("key:",key, " --- value: ", dict[key])
@@ -89,7 +86,8 @@ function handleFileSelect(evt) {
       console.log(list.length)
       console.log("plz work dude", dateFromPicker)
       console.log(list)
-      document.getElementById('target-id').innerHTML = list
+      document.getElementById('target-id').innerHTML = pplStr
+      //document.getElementById('output-box').value = pplStr
 
 
     }
